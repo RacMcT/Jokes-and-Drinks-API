@@ -26,11 +26,11 @@ getButton.addEventListener('click', function(){
   
  let processJoke =function(joke) {
     // newContent and extracted .json result
-    const newContent = document.createTextNode(joke);
+    const newJoke = document.createTextNode(joke);
     // getting the element from html file 
     const currentDiv = document.getElementById("jokeText")
     // add text node joke to child element 
-    currentDiv.appendChild(newContent);
+    currentDiv.appendChild(newJoke);
     
   }
 
@@ -55,15 +55,46 @@ function fetchSearch (searchTerm) {
     return response.json()
   }) .then(function(json){
     console.log("search results:", json); //console.log to make sure getting array/objects
+
   })
+  function search(searchTerm){
+    return Object.keys(strDrink)
+    .filter((key) => strDrink[key])
+    .map((key) => strDrink[key]);
+  }
+
+function render(searchTerm){
+  const root = document.querySelector("#drinks");
+  const list = results.map(itemToLi).join("");
+
+root.innerHTML = '<ul>${list}</ul>';
 }
+}
+
+
+
+// function render(results) {
+//   const root = document.querySelector("#root");
+//   const list = results.map(itemToLi).join("");
+
+//   root.innerHTML = `<ul>
+//     ${list}
+//   </ul>`;
+// }
+
+// function itemToLi(item) {
+//   return `<li>${item.name}</li>`;
+// }
+
+
 
 let processInput =function(drink) {
   // newContent and extracted .json result
-  const newContent = document.createTextNode(drink);
+  const newDrinks = document.createElement('li');
   // getting the element from html file 
   const currentDiv = document.getElementById("drinks")
-  // add text node joke to child element 
-  currentDiv.appendChild(newContent);
+  // add text node cocktail to child element 
+  currentDiv.appendChild(newDrinks); // append the list items to the ul
   
 }
+
