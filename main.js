@@ -1,84 +1,69 @@
-// 'use strict';
+//'use strict'
 
-// // brings in the assert module for unit testing
-// const assert = require('assert');
-// // brings in the readline module to access the command line
-// const readline = require('readline');
-// // use the readline module to print out to the command line
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
+// JOKE OF THE DAY CODE:
 
+//create the fetch call to the api address
+//on the html page the end-user is able to generate random joke
+//user can click on the button to generate the joke
 
-const pigLatin = () => {
-  let word = document.getElementById("input").value
-  word= word.toLowerCase().trim();
-  const vowels = ["a", "e", "i", "o", "u"];
+let getButton = document.getElementById("jokeBtn");
 
-// holds new word for output
-  let pigWord=""; 
+getButton.addEventListener('click', function(){
 
-  //If it doesn't start with a vowel than by default it starts with a constanant- if/else statement
-
-  if(vowels.indexOf(word[0]) > -1){
-    pigWord = word + "yay";
-    return pigWord;
-  } else{
-    let firstMatch = word.match(/[aeiou]/g) || 0;
-    let vowels = word.indexOf (firstMatch [0]);
-    pigWord = word.substring(vowels) + word.substring(0,vowels) + "ay";
-    return document.getElementById("translation").innerHTML += pigWord; 
-  }
-
+  //adding the API url for joke generator
+  let fetchJoke = fetch("https://api.jokes.one/jod");
   
+  let jsonJokeResp = fetchJoke.then(function(response){
+    console.log("Processing the results", response);
+    return response.json();
+    
+  })
+  jsonJokeResp.then (function(json){
+    console.log("json =", json)
+    processJoke(json.contents.jokes[0].joke.text);
+  })
+ })
+  
+ let processJoke =function(joke) {
+    // newContent and extracted .json result
+    const newContent = document.createTextNode(joke);
+    // getting the element from html file 
+    const currentDiv = document.getElementById("jokeText")
+    // add text node joke to child element 
+    currentDiv.appendChild(newContent);
+    
   }
 
-// the first function called in the program to get an input from the user
-// to run the function use the command: node main.js
-// to close it ctrl + C
-// const getPrompt = () => {
-//   rl.question('word ', (answer) => {
-//     console.log( pigLatin(answer) );
-//     getPrompt();
-//   });
-// }
+// COCKTAIL INPUT FORM API CODE:
 
-// // Unit Tests
-// // to use them run the command: npm test main.js
-// // to close them ctrl + C
-// if (typeof describe === 'function') {
+  //getting button element from dom and adding event listener to it
+document.getElementById("button").addEventListener("click", function(){
+  console.log("the button was clicked");
 
-//   describe('#pigLatin()', () => {
-//     it('should translate a simple word', () => {
-//       assert.equal(pigLatin('car'), 'arcay');
-//       assert.equal(pigLatin('dog'), 'ogday');
-//     });
-//     it('should translate a complex word', () => {
-//       assert.equal(pigLatin('create'), 'eatecray');
-//       assert.equal(pigLatin('valley'), 'alleyvay');
-//     });
-//     it('should attach "yay" if word begins with vowel', () => {
-//       assert.equal(pigLatin('egg'), 'eggyay');
-//       assert.equal(pigLatin('emission'), 'emissionyay');
-//     });
-//     it('should lowercase and trim word before translation', () => {
-//       assert.equal(pigLatin('HeLlO '), 'ellohay');
-//       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-//     });
-//   });
-// } else {
+  //getting input search term for ingredient by user
+let input = document.getElementById("input");
+let searchTerm = input.value;
+console.log("user input = ", searchTerm);
+fetchSearch(searchTerm);
+})
 
-//   getPrompt();
+// NEED TO REQUEST TEMP ACCESS TO CORS-ANYWHERE TO USE EACH DAY?! 
+//fetch api data for cocktail based on user input ingredient
+function fetchSearch (searchTerm) {
+  fetch(`https://cors-anywhere.herokuapp.com/www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchTerm}`)
+  .then(function(response){
+    return response.json()
+  }) .then(function(json){
+    console.log("search results:", json); //console.log to make sure getting array/objects
+  })
+}
 
-// }
-
-
-// **********
-//   HINTS
-// **********
-
-// break your code into pieces and focus on one piece at a time...
-// 1. if word begins with a vowel send to one function: adds "yay"
-// 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
-// 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
+let processInput =function(drink) {
+  // newContent and extracted .json result
+  const newContent = document.createTextNode(drink);
+  // getting the element from html file 
+  const currentDiv = document.getElementById("drinks")
+  // add text node joke to child element 
+  currentDiv.appendChild(newContent);
+  
+}
