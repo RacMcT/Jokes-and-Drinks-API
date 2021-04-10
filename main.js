@@ -55,21 +55,30 @@ function fetchSearch (searchTerm) {
     return response.json()
   }) .then(function(json){
     console.log("search results:", json); //console.log to make sure getting array/objects
+    // const li = document.createElement("li")
 
-  })
-  function search(searchTerm){
-    return Object.keys(strDrink)
-    .filter((key) => strDrink[key])
-    .map((key) => strDrink[key]);
-  }
-
-function render(searchTerm){
-  const root = document.querySelector("#drinks");
-  const list = results.map(itemToLi).join("");
-
-root.innerHTML = '<ul>${list}</ul>';
+let drinksList = json;
+let div = document.getElementById('drinksDiv');
+function arrToUl(root, drinksList) {
+  var ul = document.getElementById('drinksListUl');
+  var li;
+  root.appendChild(ul); // append the created ul to the root
+  drinksList.forEach(function(item) {
+    if (Array.isArray(item)) { // if it's an array
+      arrToUl(li, item); // call arrToUl with the li as the root
+      return;
+    }
+    li = document.createElement('li'); // create a new list item
+    li.appendChild(document.createTextNode(item)); // append the text to the li
+    ul.appendChild(li); // append the list item to the ul
+  });
 }
+arrToUl(div, drinksList);
+})
 }
+
+
+
 
 
 
@@ -79,7 +88,7 @@ root.innerHTML = '<ul>${list}</ul>';
 
 //   root.innerHTML = `<ul>
 //     ${list}
-//   </ul>`;
+//   </ul>`
 // }
 
 // function itemToLi(item) {
