@@ -49,14 +49,16 @@ getButton.addEventListener('click', function(){
 // fetchSearch(searchTerm);
 // })
 
-// NEED TO REQUEST TEMP ACCESS TO CORS-ANYWHERE TO USE EACH DAY?! 
+// NEED TO REQUEST TEMP ACCESS TO CORS-ANYWHERE TO USE EACH DAY! 
 //fetch api data for cocktail- user presses button and cocktail appears underneath
 //function that fetches a random cocktail
 
+//cors-anywhere.herokuapp.com/
+
 function fetchDrinks() { 
-  fetch(`https://cors-anywhere.herokuapp.com/www.thecocktaildb.com/api/json/v1/1/filter.php`)
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`)
   .then(function(response){
-    return response.json()})
+    return response.json()}) // error occuring here, but not sure how to fix or validate?
   .then(data => {
     displayCocktail(data.drinks)})
   }
