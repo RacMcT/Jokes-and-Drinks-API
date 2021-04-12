@@ -6,6 +6,31 @@
 //on the html page the end-user is able to generate random joke
 //user can click on the button to generate the joke
 
+
+// let fetchDrink = fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`)
+
+function fetchDrinks(){
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then(response => response.json()) // error occuring here, but not sure how to fix or validate?
+  .then(data => {
+  displayCocktail(data)})
+}
+
+
+function displayCocktail(data) {
+
+  const cocktail = data.drinks[0];
+  const cocktailDiv = document.getElementById("cocktail");    
+  
+
+  // cocktail name
+  let cocktailName = cocktail.strDrink;
+  let heading = document.createElement("h3");
+  heading.innerHTML = cocktailName;
+  cocktailDiv.appendChild(heading);
+
+}
+
+
 let getButton = document.getElementById("jokeBtn");
 
 getButton.addEventListener('click', function(){
@@ -55,29 +80,9 @@ getButton.addEventListener('click', function(){
 
 //cors-anywhere.herokuapp.com/
 
-function fetchDrinks() { 
-  fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php`)
-  .then(function(response){
-    return response.json()}) // error occuring here, but not sure how to fix or validate?
-  .then(data => {
-    displayCocktail(data.drinks)})
-  }
-  
 
-  function displayCocktail(data) {
 
-    const cocktail = data.drinks[0];
-    const cocktailDiv = document.getElementById("cocktail");    
-    
-  
-    // cocktail name
-    let cocktailName = cocktail.strDrink;
-    let heading = document.createElement("h3");
-    heading.innerHTML = cocktailName;
-    cocktailDiv.appendChild(heading);
 
-  }
-  
 
 
 // // Display drinks based on ingredient 
