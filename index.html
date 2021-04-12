@@ -8,14 +8,15 @@
 <body>
 
   <h1>Hello Friends!</h1>
-  <h2>What ingredient do you prefer for your cocktail?</h2>
-  <input type="text" id="input">
-  <button id="button">Fetch</button>
-  <div id=drinksDiv>
-  <ul id="drinksListUl"></ul>
-</div>
+  <h1>Let's explore some random cocktails!</h1>
+  <h2>Press the button below to generate cocktail suggestions</h2>
+  <!-- <input type="text" id="input"> -->
+  <button id="button" onclick="fetchDrinks()">Cocktail</button>
+  <div id="cocktail"></div>
+
 <br>
-  <h2>Click below for the joke of the day to with your cocktail!</h2>
+  <h2>Click below for the joke of the day to with your drink!</h2>
+  <p>Be careful, if you keep clicking the joke will keep repeating</p>
   <button id=jokeBtn>Joke of the Day</button>
 
   <div id=jokeText></div>
