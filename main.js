@@ -1,5 +1,5 @@
-//'use strict'
-
+//npm install node-fetch --save
+const fetch = require("node-fetch")
 
 
 // NEED TO REQUEST TEMP ACCESS TO CORS-ANYWHERE TO USE EACH DAY! 
@@ -64,7 +64,21 @@ getButton.addEventListener('click', function(){
     
   }
 
+// 5 unit tests needed:
 
 
 
+  //unit test example from Isaiah to use as template:
+  // describe('Get star war movies', () => {
+  //     it('should get 7', async () => {
+  //         await fetch('http://swapi.co/api/films/')
+  //             .then((res) => {
+  //                 return res.json()
+  //             })
+  //             .then((res) => {
+  //                 console.log(res);
+  //                 assert.equal(res.count, 7)
+  //             })
+  //     })
+  // })
 
