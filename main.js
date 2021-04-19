@@ -29,6 +29,15 @@ function displayCocktail(data) {
   cocktailDiv.appendChild(heading);
 
 }
+// ADD IN API AND UNIT TEST- ADD TO DOM LATER AFTER TESTING!
+
+function fetchMargarita() { 
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.marg)
+    })
+  }
 
 // JOKE OF THE DAY CODE:
 

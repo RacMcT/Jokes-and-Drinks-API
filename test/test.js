@@ -14,6 +14,27 @@ describe('Fetch Cocktail & Joke APIs', () => {
     assert.equal(drink)
   })
 
+  it('should return an alcohol- even through not pushed to DOM', async() => {
+    let drink;
+    await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+    .then((res) => res.json())
+    .then(data => {
+      drink = data.drinks[2].strAlcoholic     
+    })
+    assert.equal(drink, "Alcoholic")
+  })
+  
+
+  it('should return cocktail glass- even through not pushed to DOM', async() => {
+    let drink;
+    await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+    .then((res) => res.json())
+    .then(data => {
+      glass = data.drinks[0].strGlass      
+    })
+    assert.equal(glass, "Cocktail glass")
+  }) 
+
   it('should fetch the assigned joke of the day', async() => {
     let fetchJoke;
     await fetch("https://api.jokes.one/jod");
